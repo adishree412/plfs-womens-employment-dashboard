@@ -1,0 +1,636 @@
+{
+  "schema_version": 1,
+  "manifest": {
+    "run_id": "20261029T145208Z-70109",
+    "application_id": "application_1793282969050_0006",
+    "spark_version": "3.5.9",
+    "master": "yarn",
+    "input": "hdfs://master:9000/plfs/raw/perv1.csv",
+    "hdfs_output": "hdfs://master:9000/plfs/runs/20261029T145208Z-70109",
+    "duration_seconds": 58.95,
+    "min_cell_n": 30,
+    "audit": {
+      "raw_rows": 418159,
+      "invalid_keys": 0,
+      "duplicate_person_keys": 0,
+      "non_first_visits": 0,
+      "female_rows": 207181,
+      "female_missing_or_invalid_age": 0,
+      "women_15plus_rows": 160042,
+      "invalid_status_rows": 0,
+      "invalid_weight_rows": 0,
+      "curated_rows": 160042,
+      "unknown_categories": {
+        "education": 0,
+        "marital": 0,
+        "sector": 0,
+        "state": 0
+      },
+      "age_above_100_retained": 20
+    },
+    "public_bundle": true,
+    "age_standardized": {
+      "Rural": 46.80432960743289,
+      "Urban": 25.67469267625088
+    }
+  },
+  "metrics": {
+    "test_n": 31870,
+    "baseline": {
+      "accuracy": 0.6049576404141827,
+      "recall": 0.0,
+      "f1": 0.0,
+      "macro_f1": 0.376930596285435
+    },
+    "model": {
+      "accuracy": 0.6819579541888924,
+      "precision": 0.6367283262759081,
+      "recall": 0.4538522637013503,
+      "f1": 0.5299573363012429,
+      "macro_f1": 0.6448155422022148,
+      "auc_roc": 0.7188511369591218,
+      "auc_pr": 0.6230026819023893,
+      "confusion_matrix": [
+        [
+          16020,
+          3260
+        ],
+        [
+          6876,
+          5714
+        ]
+      ]
+    }
+  },
+  "experiment": {
+    "run_id": "20261029T171718Z-135524",
+    "application_id": "application_1793282969050_0007",
+    "selected": {
+      "name": "GBT depth 5, 50 iterations",
+      "kind": "gbt",
+      "depth": 5,
+      "iterations": 50
+    },
+    "accuracy_change_percentage_points": 4.631314716033885,
+    "evaluation_note": "Original test results were previously inspected. Candidate selection uses validation only, but this is a follow-up comparison, not a new untouched external test.",
+    "model": {
+      "accuracy": 0.7282711013492312,
+      "precision": 0.6835762331838565,
+      "recall": 0.5811755361397934,
+      "f1": 0.6282304456083112,
+      "macro_f1": 0.7070589007945626,
+      "auc_roc": 0.7953816998935468,
+      "auc_pr": 0.7104668987632937,
+      "confusion_matrix": [
+        [
+          15893,
+          3387
+        ],
+        [
+          5273,
+          7317
+        ]
+      ],
+      "by_sector": {
+        "Urban": {
+          "recall": 0.18561872909698995
+        }
+      }
+    }
+  },
+  "selection": {
+    "trials": [
+      {
+        "candidate": {
+          "name": "Original LR specification"
+        },
+        "validation": {
+          "accuracy": 0.6892152616450762,
+          "recall": 0.4451489533011272,
+          "macro_f1": 0.6483471611345069
+        }
+      },
+      {
+        "candidate": {
+          "name": "LR with age bands"
+        },
+        "validation": {
+          "accuracy": 0.7181556876796472,
+          "recall": 0.5586755233494364,
+          "macro_f1": 0.6939898177799806
+        }
+      },
+      {
+        "candidate": {
+          "name": "Random Forest depth 8"
+        },
+        "validation": {
+          "accuracy": 0.7139425916446824,
+          "recall": 0.5566626409017713,
+          "macro_f1": 0.6899123307241708
+        }
+      },
+      {
+        "candidate": {
+          "name": "GBT depth 3, 40 iterations"
+        },
+        "validation": {
+          "accuracy": 0.7199275504980903,
+          "recall": 0.5780998389694042,
+          "macro_f1": 0.6983262754011775
+        }
+      },
+      {
+        "candidate": {
+          "name": "GBT depth 5, 50 iterations"
+        },
+        "validation": {
+          "accuracy": 0.7304012284915541,
+          "recall": 0.5765901771336553,
+          "macro_f1": 0.7076004704771424
+        }
+      }
+    ]
+  },
+  "tables": {
+    "overview": [
+      {
+        "n": 160042,
+        "weighted_share_pct": 40.34224858657527,
+        "unweighted_share_pct": 39.495257494907584
+      }
+    ],
+    "by_age": [
+      {
+        "age_band": "55–64",
+        "n": 18620,
+        "weighted_share_pct": 41.70697719030683,
+        "unweighted_share_pct": 40.37056928034372
+      },
+      {
+        "age_band": "65+",
+        "n": 15358,
+        "weighted_share_pct": 14.828407895826784,
+        "unweighted_share_pct": 14.35082693058992
+      },
+      {
+        "age_band": "35–44",
+        "n": 32673,
+        "weighted_share_pct": 58.60649796409768,
+        "unweighted_share_pct": 57.90101919015701
+      },
+      {
+        "age_band": "15–24",
+        "n": 36362,
+        "weighted_share_pct": 20.419022186234788,
+        "unweighted_share_pct": 19.300368516583248
+      },
+      {
+        "age_band": "25–34",
+        "n": 32528,
+        "weighted_share_pct": 42.67822921866157,
+        "unweighted_share_pct": 42.23438268568618
+      },
+      {
+        "age_band": "45–54",
+        "n": 24501,
+        "weighted_share_pct": 58.32142428994713,
+        "unweighted_share_pct": 56.381372188890246
+      }
+    ],
+    "by_education": [
+      {
+        "education": "Primary",
+        "n": 18488,
+        "weighted_share_pct": 49.53402750407582,
+        "unweighted_share_pct": 48.496321938554736
+      },
+      {
+        "education": "Higher secondary",
+        "n": 19307,
+        "weighted_share_pct": 23.856008003361296,
+        "unweighted_share_pct": 25.83518930957684
+      },
+      {
+        "education": "Middle",
+        "n": 32515,
+        "weighted_share_pct": 37.81557969977525,
+        "unweighted_share_pct": 38.38843610641243
+      },
+      {
+        "education": "Graduate",
+        "n": 14678,
+        "weighted_share_pct": 30.52229616303631,
+        "unweighted_share_pct": 33.396920561384384
+      },
+      {
+        "education": "Not literate",
+        "n": 38770,
+        "weighted_share_pct": 50.40560114250685,
+        "unweighted_share_pct": 48.15579055971112
+      },
+      {
+        "education": "Literate without formal schooling",
+        "n": 242,
+        "weighted_share_pct": 46.053400546405655,
+        "unweighted_share_pct": 42.56198347107438
+      },
+      {
+        "education": "Secondary",
+        "n": 22059,
+        "weighted_share_pct": 28.503082772306605,
+        "unweighted_share_pct": 28.405639421551296
+      },
+      {
+        "education": "Below primary",
+        "n": 7823,
+        "weighted_share_pct": 51.88667090554748,
+        "unweighted_share_pct": 52.11555669180621
+      },
+      {
+        "education": "Diploma/certificate",
+        "n": 1299,
+        "weighted_share_pct": 48.80508981880602,
+        "unweighted_share_pct": 50.88529638183218
+      },
+      {
+        "education": "Postgraduate and above",
+        "n": 4861,
+        "weighted_share_pct": 39.584146966255545,
+        "unweighted_share_pct": 43.07755605842419
+      }
+    ],
+    "by_marital": [
+      {
+        "marital": "Widowed",
+        "n": 20047,
+        "weighted_share_pct": 34.46474996313717,
+        "unweighted_share_pct": 34.18965431236594
+      },
+      {
+        "marital": "Currently married",
+        "n": 106491,
+        "weighted_share_pct": 46.47608409623965,
+        "unweighted_share_pct": 45.37003127024819
+      },
+      {
+        "marital": "Divorced/separated",
+        "n": 1248,
+        "weighted_share_pct": 62.4034009894981,
+        "unweighted_share_pct": 61.93910256410256
+      },
+      {
+        "marital": "Never married",
+        "n": 32256,
+        "weighted_share_pct": 20.854031951908407,
+        "unweighted_share_pct": 22.529141865079364
+      }
+    ],
+    "by_sector": [
+      {
+        "sector": "Rural",
+        "n": 90920,
+        "weighted_share_pct": 46.54597659881349,
+        "unweighted_share_pct": 49.34997800263968
+      },
+      {
+        "sector": "Urban",
+        "n": 69122,
+        "weighted_share_pct": 25.977449658409608,
+        "unweighted_share_pct": 26.532797083417726
+      }
+    ],
+    "by_state": [
+      {
+        "state": "Himachal Pradesh",
+        "n": 2835,
+        "weighted_share_pct": 62.29839421178049,
+        "unweighted_share_pct": 63.98589065255732
+      },
+      {
+        "state": "Jammu & Kashmir",
+        "n": 5178,
+        "weighted_share_pct": 47.05664159955463,
+        "unweighted_share_pct": 43.45307068366164
+      },
+      {
+        "state": "Gujarat",
+        "n": 6056,
+        "weighted_share_pct": 45.56103982616607,
+        "unweighted_share_pct": 42.78401585204755
+      },
+      {
+        "state": "Tamilnadu",
+        "n": 9432,
+        "weighted_share_pct": 41.52595821031248,
+        "unweighted_share_pct": 40.70186598812553
+      },
+      {
+        "state": "Telangana",
+        "n": 3944,
+        "weighted_share_pct": 44.31793588674869,
+        "unweighted_share_pct": 42.19066937119676
+      },
+      {
+        "state": "West Bengal",
+        "n": 10155,
+        "weighted_share_pct": 39.15795796355211,
+        "unweighted_share_pct": 35.56868537666174
+      },
+      {
+        "state": "Maharashtra",
+        "n": 12140,
+        "weighted_share_pct": 39.0675860229086,
+        "unweighted_share_pct": 38.49258649093905
+      },
+      {
+        "state": "Tripura",
+        "n": 2894,
+        "weighted_share_pct": 46.3105478670182,
+        "unweighted_share_pct": 40.428472702142365
+      },
+      {
+        "state": "Assam",
+        "n": 5827,
+        "weighted_share_pct": 48.11872425937957,
+        "unweighted_share_pct": 43.504376179852414
+      },
+      {
+        "state": "Ladakh",
+        "n": 412,
+        "weighted_share_pct": 47.068610615739566,
+        "unweighted_share_pct": 39.320388349514566
+      },
+      {
+        "state": "Arunachal Pradesh",
+        "n": 2849,
+        "weighted_share_pct": 62.40045943626771,
+        "unweighted_share_pct": 57.91505791505792
+      },
+      {
+        "state": "Nagaland",
+        "n": 1497,
+        "weighted_share_pct": 59.66819944685204,
+        "unweighted_share_pct": 58.51703406813628
+      },
+      {
+        "state": "Lakshadweep",
+        "n": 284,
+        "weighted_share_pct": 11.269589841465546,
+        "unweighted_share_pct": 11.971830985915492
+      },
+      {
+        "state": "Jharkhand",
+        "n": 4540,
+        "weighted_share_pct": 49.595477335495154,
+        "unweighted_share_pct": 41.12334801762115
+      },
+      {
+        "state": "Bihar",
+        "n": 7398,
+        "weighted_share_pct": 30.11279119618631,
+        "unweighted_share_pct": 26.06109759394431
+      },
+      {
+        "state": "Chhattisgarh",
+        "n": 3753,
+        "weighted_share_pct": 58.08770623918636,
+        "unweighted_share_pct": 54.88942179589662
+      },
+      {
+        "state": "Manipur",
+        "n": 3722,
+        "weighted_share_pct": 44.97649973286124,
+        "unweighted_share_pct": 45.99677592692101
+      },
+      {
+        "state": "Karnataka",
+        "n": 6032,
+        "weighted_share_pct": 37.23641826848836,
+        "unweighted_share_pct": 34.48275862068966
+      },
+      {
+        "state": "Delhi",
+        "n": 1298,
+        "weighted_share_pct": 18.26000857341936,
+        "unweighted_share_pct": 15.331278890600924
+      },
+      {
+        "state": "Chandigarh",
+        "n": 481,
+        "weighted_share_pct": 26.225316437495767,
+        "unweighted_share_pct": 28.066528066528065
+      },
+      {
+        "state": "Odisha",
+        "n": 6396,
+        "weighted_share_pct": 48.00871514730181,
+        "unweighted_share_pct": 43.82426516572858
+      },
+      {
+        "state": "Punjab",
+        "n": 4857,
+        "weighted_share_pct": 28.905816344560304,
+        "unweighted_share_pct": 27.444924850730903
+      },
+      {
+        "state": "Madhya Pradesh",
+        "n": 8008,
+        "weighted_share_pct": 51.94820545577474,
+        "unweighted_share_pct": 45.81668331668332
+      },
+      {
+        "state": "Uttar Pradesh",
+        "n": 15279,
+        "weighted_share_pct": 33.62545105971244,
+        "unweighted_share_pct": 30.36193468158911
+      },
+      {
+        "state": "Haryana",
+        "n": 3889,
+        "weighted_share_pct": 23.624603163826205,
+        "unweighted_share_pct": 23.06505528413474
+      },
+      {
+        "state": "Mizoram",
+        "n": 2580,
+        "weighted_share_pct": 40.70612628875035,
+        "unweighted_share_pct": 42.05426356589148
+      },
+      {
+        "state": "Sikkim",
+        "n": 1056,
+        "weighted_share_pct": 66.76742008205474,
+        "unweighted_share_pct": 59.09090909090909
+      },
+      {
+        "state": "Uttarakhand",
+        "n": 2566,
+        "weighted_share_pct": 43.73933138236477,
+        "unweighted_share_pct": 40.99766173031957
+      },
+      {
+        "state": "Meghalaya",
+        "n": 2215,
+        "weighted_share_pct": 65.89276740360988,
+        "unweighted_share_pct": 58.645598194130926
+      },
+      {
+        "state": "Andaman & N. Island",
+        "n": 691,
+        "weighted_share_pct": 36.66018423665524,
+        "unweighted_share_pct": 36.1794500723589
+      },
+      {
+        "state": "Rajasthan",
+        "n": 7451,
+        "weighted_share_pct": 48.871317824930586,
+        "unweighted_share_pct": 46.28908871292444
+      },
+      {
+        "state": "Andhra Pradesh",
+        "n": 5589,
+        "weighted_share_pct": 43.10023536433992,
+        "unweighted_share_pct": 40.00715691536948
+      },
+      {
+        "state": "Kerala",
+        "n": 6785,
+        "weighted_share_pct": 36.03224551970629,
+        "unweighted_share_pct": 35.40162122328666
+      },
+      {
+        "state": "Goa",
+        "n": 670,
+        "weighted_share_pct": 24.37721062241288,
+        "unweighted_share_pct": 24.62686567164179
+      },
+      {
+        "state": "Puduchery",
+        "n": 832,
+        "weighted_share_pct": 32.196422324095344,
+        "unweighted_share_pct": 28.365384615384617
+      },
+      {
+        "state": "D & N. Haveli & Daman & Diu",
+        "n": 451,
+        "weighted_share_pct": 45.98762487028323,
+        "unweighted_share_pct": 48.55875831485588
+      }
+    ],
+    "by_sector_age": [
+      {
+        "sector": "Rural",
+        "age_band": "15–24",
+        "n": 21284,
+        "rate": 22.99465214668197
+      },
+      {
+        "sector": "Rural",
+        "age_band": "25–34",
+        "n": 18262,
+        "rate": 47.98421300162306
+      },
+      {
+        "sector": "Rural",
+        "age_band": "35–44",
+        "n": 18657,
+        "rate": 67.54526747845465
+      },
+      {
+        "sector": "Rural",
+        "age_band": "45–54",
+        "n": 13712,
+        "rate": 69.08535557819575
+      },
+      {
+        "sector": "Rural",
+        "age_band": "55–64",
+        "n": 10463,
+        "rate": 50.77662027243405
+      },
+      {
+        "sector": "Rural",
+        "age_band": "65+",
+        "n": 8542,
+        "rate": 18.07634794020593
+      },
+      {
+        "sector": "Urban",
+        "age_band": "15–24",
+        "n": 15078,
+        "rate": 13.785988757674497
+      },
+      {
+        "sector": "Urban",
+        "age_band": "25–34",
+        "n": 14266,
+        "rate": 30.62710895236936
+      },
+      {
+        "sector": "Urban",
+        "age_band": "35–44",
+        "n": 14016,
+        "rate": 38.70098216728697
+      },
+      {
+        "sector": "Urban",
+        "age_band": "45–54",
+        "n": 10789,
+        "rate": 34.75692061610599
+      },
+      {
+        "sector": "Urban",
+        "age_band": "55–64",
+        "n": 8157,
+        "rate": 20.898633077061675
+      },
+      {
+        "sector": "Urban",
+        "age_band": "65+",
+        "n": 6816,
+        "rate": 7.4841346522605905
+      }
+    ],
+    "by_marital_age": [
+      {
+        "age_band": "25–34",
+        "marital": "Currently married",
+        "n": 27867,
+        "rate": 41.52533733694675
+      },
+      {
+        "age_band": "25–34",
+        "marital": "Never married",
+        "n": 3981,
+        "rate": 48.51087155436187
+      }
+    ],
+    "by_education_sector": [
+      {
+        "education": "Not literate",
+        "sector": "Rural",
+        "n": 27929,
+        "rate": 54.695969934606545
+      },
+      {
+        "education": "Not literate",
+        "sector": "Urban",
+        "n": 10841,
+        "rate": 29.847529261567317
+      },
+      {
+        "education": "Postgraduate and above",
+        "sector": "Rural",
+        "n": 980,
+        "rate": 39.81797144936226
+      },
+      {
+        "education": "Postgraduate and above",
+        "sector": "Urban",
+        "n": 3881,
+        "rate": 39.48024295247844
+      }
+    ]
+  }
+}
