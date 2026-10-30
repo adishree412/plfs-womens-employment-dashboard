@@ -321,8 +321,6 @@ else:
         st.json(manifest['audit'])
     with st.expander('Terminal commands for the project demonstration'):
         st.code('bash scripts/verify.sh\nsudo docker compose exec -T --user hadoop master hdfs fsck /plfs/raw/perv1.csv -files -blocks -locations\nsudo docker compose exec -T --user hadoop master yarn application -status '+manifest['application_id']+'\npython3 scripts/show-results.py',language='bash')
-    findings=ROOT/'docs/complete-project-findings.pdf'
-    if findings.exists():st.download_button('Download detailed findings PDF',findings.read_bytes(),file_name=findings.name,mime='application/pdf')
     note('The dashboard does not check whether the cluster is running now. It also does not calculate margins of error, so small differences should be interpreted carefully.')
 
 html('<div class="sectionline"></div>')
