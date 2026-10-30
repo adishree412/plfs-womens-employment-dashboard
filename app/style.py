@@ -85,8 +85,32 @@ button:focus-visible,[role="button"]:focus-visible {{outline:3px solid var(--dp-
 .note {{border:4px solid #000;background:var(--dp-color-field);box-shadow:6px 6px 0 #000;padding:13px 17px;margin:25px 8px 22px 0;font-size:16px;font-weight:400;line-height:1.55}}
 .caption {{font-size:15px;font-weight:400;line-height:1.55;margin:10px 0 25px}}
 .sectionline {{border-top:4px solid #000;margin:38px 0 18px}}
+.intro-poster {{background:var(--dp-color-emphasis);border:5px solid #000;box-shadow:12px 12px 0 #000;padding:27px 31px;margin:22px 13px 34px 0}}
+.intro-poster .kicker {{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;border-bottom:3px solid #000;display:inline-block;padding-bottom:5px}}
+.intro-poster h1 {{font-size:clamp(2.2rem,5.3vw,5rem);line-height:1.02;letter-spacing:-.065em;font-weight:900;text-transform:uppercase;max-width:1000px;margin:19px 0 14px}}
+.intro-poster p {{font-size:18px;line-height:1.55;max-width:900px;margin:0}}
+.intro-grid {{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:18px 9px 28px 0}}
+.intro-card {{background:#fff;border:4px solid #000;box-shadow:7px 7px 0 #000;padding:17px 18px}}
+.intro-card:nth-child(2) {{background:var(--dp-color-field)}}
+.intro-card:nth-child(3) {{background:var(--dp-color-emphasis)}}
+.intro-card .num {{font-size:13px;font-weight:900;background:#000;color:#fff;display:inline-block;padding:2px 7px;margin-bottom:10px}}
+.intro-card h3 {{font-size:21px;line-height:1.15;margin:0 0 8px}}
+.intro-card p {{font-size:16px;font-weight:400;line-height:1.52;margin:0}}
+.flow-grid {{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin:17px 9px 26px 0}}
+.flow-step {{background:#fff;border:3px solid #000;padding:14px 15px;box-shadow:5px 5px 0 #000}}
+.flow-step b {{font-size:13px;background:var(--dp-color-signal);border:2px solid #000;padding:2px 6px}}
+.flow-step h3 {{font-size:18px;line-height:1.2;margin:11px 0 5px}}
+.flow-step p {{font-size:15px;line-height:1.48;margin:0}}
+.req-list {{border:4px solid #000;background:#fff;box-shadow:8px 8px 0 #000;margin:18px 9px 25px 0}}
+.req-row {{display:grid;grid-template-columns:48px minmax(0,1fr) 165px;gap:15px;align-items:start;padding:15px 17px;border-bottom:2px solid #000}}
+.req-row:last-child {{border-bottom:0}}
+.req-num {{font-size:20px;font-weight:900;line-height:1}}
+.req-main b {{font-size:17px;font-weight:800}}
+.req-main p {{font-size:15px;line-height:1.5;margin:5px 0 0}}
+.req-status {{font-size:12px;font-weight:900;text-transform:uppercase;border:2px solid #000;background:var(--dp-color-emphasis);padding:5px 7px;line-height:1.3}}
+.req-status.pending {{background:var(--dp-color-field)}}
 /* Compact controls and zero motion at reduced-motion preference. */
-@media(max-width:1050px) {{.hero {{padding:23px}}.strip {{font-size:clamp(2rem,5vw,4rem)}}.statrow {{gap:14px}}}}
+@media(max-width:1050px) {{.hero {{padding:23px}}.strip {{font-size:clamp(2rem,5vw,4rem)}}.statrow {{gap:14px}}.flow-grid {{grid-template-columns:repeat(2,minmax(0,1fr))}}}}
 @media(max-width:720px) {{
  div[data-testid="stMainBlockContainer"].block-container {{padding-left:1rem!important;padding-right:1rem!important}}
  .brand {{align-items:flex-start}}.brand-meta {{display:none}}
@@ -100,11 +124,17 @@ button:focus-visible,[role="button"]:focus-visible {{outline:3px solid var(--dp-
  .stat {{box-shadow:5px 5px 0 #000;padding:12px;min-height:105px}}
  [data-testid="stDataFrame"],div.stPlotlyChart {{box-shadow:5px 5px 0 #000}}
  .feature {{box-shadow:5px 5px 0 #000}}
+ .intro-poster {{padding:19px;margin-right:7px;box-shadow:7px 7px 0 #000}}
+ .intro-grid {{grid-template-columns:1fr;gap:13px}}
+ .intro-card {{box-shadow:5px 5px 0 #000}}
+ .req-row {{grid-template-columns:32px minmax(0,1fr);gap:8px 12px}}
+ .req-status {{grid-column:2;justify-self:start}}
 }}
 @media(max-width:420px) {{
  .brand-name {{font-size:16px}}.strip {{font-size:clamp(1.5rem,7.7vw,2.7rem)}}
  .hero h1 {{font-size:4.5rem}}.statrow {{grid-template-columns:1fr}}.stat:last-child:nth-child(3) {{grid-column:auto}}
  [data-testid="stRadio"] label {{padding:6px 8px}}[data-testid="stRadio"] label p {{font-size:12px}}
+ .flow-grid {{grid-template-columns:1fr}}
 }}
 @media(prefers-reduced-motion:reduce) {{*,*::before,*::after {{scroll-behavior:auto!important;transition:none!important;animation:none!important}}}}
 </style>''',unsafe_allow_html=True)

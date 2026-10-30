@@ -1,6 +1,6 @@
 # Women and work in India — PLFS dashboard
 
-A read-only Streamlit dashboard for broad, survey-weighted aggregate results from the PLFS July 2023–June 2024 first-visit person file. The analysis ran on a Hadoop/Spark YARN cluster before these summaries were exported. This repository has **no raw PLFS person records, no detailed five-way cube, and no individual model predictions**. The public dashboard shows broad groups; detailed combined filters remain in the local project.
+A read-only Streamlit dashboard for broad, survey-weighted aggregate results from the PLFS July 2023–June 2024 first-visit person file. The analysis ran on a Hadoop/Spark YARN cluster before these summaries were exported. The opening tab explains the Big Data workflow and maps the six course requirements to project evidence. This repository has **no raw PLFS person records, no detailed five-way cube, and no individual model predictions**. The public dashboard shows broad groups; detailed combined filters remain in the local project.
 
 ## Run locally
 

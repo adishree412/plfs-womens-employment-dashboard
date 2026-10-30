@@ -29,6 +29,13 @@ def heading(kicker,title,deck=''):
     st.header(title)
     if deck:html(f'<p class="deck">{deck}</p>')
 def card(value,label):return f'<div class="stat"><div class="value">{value}</div><div class="label">{label}</div></div>'
+def intro_card(number,title,body):
+    return f'<div class="intro-card"><span class="num">{number}</span><h3>{title}</h3><p>{body}</p></div>'
+def flow_step(number,title,body):
+    return f'<div class="flow-step"><b>{number}</b><h3>{title}</h3><p>{body}</p></div>'
+def requirement_row(number,title,evidence,status,pending=False):
+    kind='req-status pending' if pending else 'req-status'
+    return f'<div class="req-row"><div class="req-num">{number}</div><div class="req-main"><b>{title}</b><p>{evidence}</p></div><div class="{kind}">{status}</div></div>'
 def note(text):html(f'<div class="note">{text}</div>')
 def caption(text):html(f'<div class="caption">{text}</div>')
 def chart(fig,height=360):
@@ -110,7 +117,7 @@ def confusion(matrix,title):
     chart(fig,290)
 
 html('<div class="brand"><div class="brand-name"><span class="brand-dot"></span>Women and work in India</div><div class="brand-meta">PLFS survey · 2023–24</div></div>')
-page=st.radio('Section',['The story','Explore the data','Model results','How we did it'],horizontal=True,label_visibility='collapsed')
+page=st.radio('Section',['Project intro','The story','Explore the data','Model results','How we did it'],horizontal=True,label_visibility='collapsed')
 
 try:run=load_run(ARTIFACTS)
 except (OSError,ValueError,KeyError,TypeError) as exc:
@@ -134,7 +141,42 @@ else:
     education_sector=education_by_sector(cube)
 marital_overall=tables['by_marital'].set_index('marital')
 
-if page=='The story':
+if page=='Project intro':
+    html('''<div class="intro-poster"><div class="kicker">Big Data Analytics mini-project · PLFS 2023–24</div>
+    <h1>How does women’s work differ across India?</h1>
+    <p>We studied women aged 15 or older in India’s labour force survey. Spark read the survey file from Hadoop storage, calculated employment estimates, and tested a prediction model. This dashboard explains the saved results.</p></div>''')
+    heading('Why these tools?','What makes this a Big Data project?',
+            'The course asks for an end-to-end cluster workflow: store the data, run analysis across workers, and explain the results. The CSV is about 119 MB—small enough for one laptop—but it contains 418,159 records and meets the course’s 10,000-record alternative.')
+    html('<div class="intro-grid">'+
+         intro_card('HDFS','Store the survey file','Hadoop Distributed File System stores the file in blocks. One NameNode keeps track of them; two DataNodes hold copies. The raw file passed the HDFS health check with two copies of its block.')+
+         intro_card('YARN','Assign the work','YARN is the cluster scheduler. One ResourceManager assigns jobs, and two NodeManagers run the assigned tasks. The saved cluster check found both workers active.')+
+         intro_card('SPARK','Calculate and model','Spark read the file from HDFS and ran on YARN. Spark SQL/DataFrames made the weighted tables; Spark MLlib trained and evaluated the prediction models.')+'</div>')
+    note('All three Docker containers run on one Linux Mint laptop with 15 GiB of RAM. They demonstrate separate Hadoop services and job scheduling, but they do not provide protection against failure of the laptop or its disk.')
+    heading('The steps','From survey file to dashboard',
+            'The dashboard is the last step. It reads saved summaries; it does not run Hadoop or Spark when you open a page.')
+    html('<div class="flow-grid">'+
+         flow_step('01','Load','Put the PLFS person CSV into HDFS and check that its stored block is healthy.')+
+         flow_step('02','Check','Keep women aged 15 or older and check person keys, work-status codes, and survey weights.')+
+         flow_step('03','Analyse','Run Spark on YARN to make weighted group estimates and test MLlib models.')+
+         flow_step('04','Explain','Export aggregate tables, model scores, plots, the report, and this dashboard.')+'</div>')
+    heading('Course checklist','How the six lab requirements are covered',
+            'This checks the six mandatory items in the supplied Big Data Analytics mini-project guidelines. A saved successful run is evidence of what happened; the live demo and requested UI screenshots are separate submission tasks.')
+    html('<div class="req-list">'+
+         requirement_row('1','Multi-node HDFS and YARN','One master runs NameNode and ResourceManager. Two workers each run DataNode and NodeManager. The recorded check showed two live DataNodes and two RUNNING NodeManagers.','Verified in saved check')+
+         requirement_row('2','Data stored in HDFS and read by Spark','The 119,224,634-byte perv1.csv file was healthy in HDFS with replication factor 2. The successful Spark run names its HDFS input path.','Verified')+
+         requirement_row('3','Spark jobs run on YARN','The main analysis succeeded as '+manifest['application_id']+' with master=yarn. A screenshot of the YARN or Spark UI still needs to be added to the submission.','Run verified; screenshot due',True)+
+         requirement_row('4','At least two Spark components','The project uses Spark SQL/DataFrames for group tables and Spark MLlib for classification models.','Verified')+
+         requirement_row('5','Enough data','The guideline says 500 MB <em>or</em> 10,000+ records. This CSV is about 119 MB, but has 418,159 records, so it qualifies through the record-count option.','Record-count rule met')+
+         requirement_row('6','Original analysis and insights','The question is women’s usual-status work. The findings include an age-adjusted rural–urban comparison, a marital-status pattern within ages 25–34, and education-group differences.','Findings recorded')+'</div>')
+    heading('Before submission','What the team still needs to add',
+            'The technical results are saved, but the course also grades the report and each student’s live explanation.')
+    st.markdown('''- **Report:** a 24-page draft exists, within the required 15–25 pages. Fill in real team/course details and add genuine HDFS, YARN, Spark, and results screenshots; check the page count again afterward.
+- **Source code:** the Hadoop configuration, Spark programs, scripts, and dashboard are prepared.
+- **Demo and viva:** run the cluster checks live and make sure each team member can explain the data, survey weights, YARN job, and model limitations.
+- **Data rights:** the shareable dashboard contains broad aggregate results. Raw person records and the detailed internal table stay out of the public deployment.''')
+    caption('Source for the checklist: the course-supplied “Mini Project Guidelines: Big Data Analytics” PDF. Survey source: MoSPI PLFS July 2023–June 2024. The dashboard is a useful visualization, but the guidelines do not list a custom dashboard as a mandatory item.')
+
+elif page=='The story':
     html(f'''<div class="hero"><div class="hero-top"><div class="hero-label">Women aged 15 or older · India · 2023–24</div><div class="hero-arrow" aria-hidden="true">↗</div></div>
     <div class="poster-strips"><span class="strip strip-white">SHARE OF WOMEN</span><span class="strip strip-black">WHO WORK</span></div>
     <h1>{val(float(overview['weighted_share_pct']))}</h1>
