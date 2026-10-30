@@ -108,7 +108,6 @@ button:focus-visible,[role="button"]:focus-visible {{outline:3px solid var(--dp-
 .req-main b {{font-size:17px;font-weight:800}}
 .req-main p {{font-size:15px;line-height:1.5;margin:5px 0 0}}
 .req-status {{font-size:12px;font-weight:900;text-transform:uppercase;border:2px solid #000;background:var(--dp-color-emphasis);padding:5px 7px;line-height:1.3}}
-.req-status.pending {{background:var(--dp-color-field)}}
 /* Compact controls and zero motion at reduced-motion preference. */
 @media(max-width:1050px) {{.hero {{padding:23px}}.strip {{font-size:clamp(2rem,5vw,4rem)}}.statrow {{gap:14px}}.flow-grid {{grid-template-columns:repeat(2,minmax(0,1fr))}}}}
 @media(max-width:720px) {{
